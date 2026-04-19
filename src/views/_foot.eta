@@ -1,3 +1,11 @@
+    <footer class="mt-12 border-t border-slate-200 pt-4 text-xs text-slate-500 dark:border-slate-800">
+      <nav class="flex flex-wrap items-center gap-x-4 gap-y-1">
+        <span><%= it.site.name %></span>
+        <a href="/privacy" class="hover:text-slate-900 dark:hover:text-slate-100">Privacy</a>
+        <a href="/terms" class="hover:text-slate-900 dark:hover:text-slate-100">Terms</a>
+        <a href="mailto:<%= it.site.contact %>" class="hover:text-slate-900 dark:hover:text-slate-100">Contact</a>
+      </nav>
+    </footer>
   </div>
 </body>
 </html>

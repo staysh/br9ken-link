@@ -1,0 +1,44 @@
+# /etc/nginx/sites-available/dinky.horse
+#
+# Drop this in place, enable it, reload nginx, then run:
+#   sudo certbot --nginx -d dinky.horse
+# certbot will rewrite this block to terminate TLS and add an HTTP→HTTPS redirect.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name dinky.horse;
+
+    # Access log per-site so it's easy to tail during bring-up.
+    access_log /var/log/nginx/dinky.horse.access.log;
+    error_log  /var/log/nginx/dinky.horse.error.log;
+
+    # Twilio webhook posts are small form fields; leave headroom without inviting
+    # arbitrary uploads. Node itself caps the body at 5 MB in src/index.ts.
+    client_max_body_size 8m;
+
+    # gzip text responses. Media is served with its own Cache-Control from Node.
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css text/xml application/xml application/rss+xml
+               application/json application/javascript image/svg+xml;
+
+    location / {
+        proxy_pass         http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+
+        # Fastify runs with trustProxy: true and reads these to form absolute
+        # URLs (including the one Twilio signs against).
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host  $host;
+
+        proxy_connect_timeout 5s;
+        proxy_send_timeout    30s;
+        proxy_read_timeout    30s;
+    }
+}

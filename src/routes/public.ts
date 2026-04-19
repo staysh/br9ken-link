@@ -38,5 +38,15 @@ export async function publicRoutes(app: FastifyInstance): Promise<void> {
     reply.type("text/html; charset=utf-8").send(html);
   });
 
+  app.get("/privacy", async (_req, reply) => {
+    const html = await render("privacy.eta", {});
+    reply.type("text/html; charset=utf-8").send(html);
+  });
+
+  app.get("/terms", async (_req, reply) => {
+    const html = await render("terms.eta", {});
+    reply.type("text/html; charset=utf-8").send(html);
+  });
+
   app.get("/healthz", async (_req, reply) => reply.type("text/plain").send("ok"));
 }

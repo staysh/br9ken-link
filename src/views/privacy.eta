@@ -1,0 +1,72 @@
+<%~ include("_head", { title: `Privacy — ${it.site.name}` }) %>
+
+<nav class="mb-4 text-sm">
+  <a href="/" class="text-slate-500 hover:text-slate-900 dark:hover:text-slate-100">← <%= it.site.name %></a>
+</nav>
+
+<article class="space-y-4 text-sm leading-relaxed text-slate-800 dark:text-slate-200">
+  <header>
+    <h1 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">Privacy</h1>
+    <p class="mt-1 text-xs text-slate-500">Effective 2026-04-19.</p>
+  </header>
+
+  <p><%= it.site.name %> is a bulletin board for event flyers sent in by text
+     message. We keep the footprint small on purpose. Here is everything we
+     hold onto.</p>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">What we collect</h2>
+    <ul class="mt-2 list-disc space-y-1 pl-6">
+      <li>Your phone number, when you text us.</li>
+      <li>The words and any photo or video you send us.</li>
+      <li>Whatever the message's location hints at — a venue, a city, a ZIP.</li>
+      <li>A log of messages in and out, so we can follow a conversation and investigate abuse.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">What we do with it</h2>
+    <ul class="mt-2 list-disc space-y-1 pl-6">
+      <li>Show approved flyers on the site and in its RSS feeds.</li>
+      <li>Route submissions to a human moderator for yes/no.</li>
+      <li>Reply to you over SMS when there is something to say back.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">What we don't do</h2>
+    <p class="mt-2">We do not sell your data. We do not send marketing. We do
+       not share your phone number with anyone outside the
+       carriers that carry the message.</p>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Who sees it besides us</h2>
+    <p class="mt-2">Our SMS carrier (Twilio) and, if you email us, whatever
+       mail service handles that email. That is it.</p>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Opting out</h2>
+    <p class="mt-2">Text <code class="rounded bg-slate-100 px-1 dark:bg-slate-800">STOP</code>
+       to the number you heard from and we stop. Text
+       <code class="rounded bg-slate-100 px-1 dark:bg-slate-800">HELP</code>
+       and we'll point you back here. To have your submissions or your number
+       forgotten, email
+       <a href="mailto:<%= it.site.contact %>" class="underline"><%= it.site.contact %></a>.</p>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">How long we keep it</h2>
+    <p class="mt-2">Approved flyers stick around until the event is well past
+       or we're asked to remove them. Rejected and unprocessed messages get
+       cleaned up on a rolling basis.</p>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Contact</h2>
+    <p class="mt-2"><a href="mailto:<%= it.site.contact %>" class="underline"><%= it.site.contact %></a></p>
+  </section>
+</article>
+
+<%~ include("_foot") %>

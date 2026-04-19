@@ -1,6 +1,7 @@
 import { Eta } from "eta";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
+import { config } from "../config.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -10,8 +11,15 @@ export const eta = new Eta({
   autoTrim: false,
 });
 
+// Every template receives `site` so copy (footer, legal pages, etc.) can be
+// parameterized without route-level plumbing.
+export const site = {
+  name: config.SITE_NAME,
+  contact: config.CONTACT_EMAIL,
+} as const;
+
 export async function render(name: string, data: Record<string, unknown>): Promise<string> {
-  const out = await eta.renderAsync(name, { fmt, ...data });
+  const out = await eta.renderAsync(name, { fmt, site, ...data });
   return out ?? "";
 }
 

@@ -1,0 +1,60 @@
+<%~ include("_head", { title: `Terms — ${it.site.name}` }) %>
+
+<nav class="mb-4 text-sm">
+  <a href="/" class="text-slate-500 hover:text-slate-900 dark:hover:text-slate-100">← <%= it.site.name %></a>
+</nav>
+
+<article class="space-y-4 text-sm leading-relaxed text-slate-800 dark:text-slate-200">
+  <header>
+    <h1 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">Terms</h1>
+    <p class="mt-1 text-xs text-slate-500">Effective 2026-04-19.</p>
+  </header>
+
+  <p><%= it.site.name %> is a small, hand-moderated board for event flyers.
+     Texting the number or using the site means you're good with the short
+     list below.</p>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Texting us</h2>
+    <ul class="mt-2 list-disc space-y-1 pl-6">
+      <li>When you send a flyer to our number, you're asking us to consider publishing it and you agree to receive replies about it.</li>
+      <li>Message and data rates from your carrier may apply. We don't charge anything.</li>
+      <li>Text <code class="rounded bg-slate-100 px-1 dark:bg-slate-800">STOP</code> to stop. Text <code class="rounded bg-slate-100 px-1 dark:bg-slate-800">HELP</code> for help.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">What you send</h2>
+    <ul class="mt-2 list-disc space-y-1 pl-6">
+      <li>Send things you made or have the right to share.</li>
+      <li>No illegal content, harassment, or anyone's private info without permission. Events, not ads for services or products.</li>
+      <li>By sending it you give <%= it.site.name %> permission to show it on the site and its feeds. You can ask us to take it down at any time.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Moderation</h2>
+    <p class="mt-2">A human decides yes or no. We don't owe anyone a
+       publication and we can remove anything for any reason.</p>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">No warranty</h2>
+    <p class="mt-2">The site is offered as-is. Events listed here are run by
+       other people; confirm before you go. <%= it.site.name %> isn't
+       responsible for what happens there or for missed or wrong listings.</p>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Changes</h2>
+    <p class="mt-2">If these terms change, the new version goes up here with a
+       new effective date. Continued use means you're good with the update.</p>
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Contact</h2>
+    <p class="mt-2"><a href="mailto:<%= it.site.contact %>" class="underline"><%= it.site.contact %></a></p>
+  </section>
+</article>
+
+<%~ include("_foot") %>

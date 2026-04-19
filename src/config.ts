@@ -27,6 +27,8 @@ const schema = z.object({
   HOST: z.string().default("127.0.0.1"),
   PORT: z.coerce.number().int().positive().default(3000),
   PUBLIC_BASE_URL: z.string().url(),
+  SITE_NAME: z.string().default("dinky.horse"),
+  CONTACT_EMAIL: z.string().email().default("staysh@br9ken.link"),
 
   DATABASE_URL: z.string().default("./data/flyer.sqlite"),
   SPATIALITE_PATH: z.string().default("mod_spatialite"),
