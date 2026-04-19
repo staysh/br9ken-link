@@ -1,0 +1,30 @@
+<%~ include("_head", { title: "Flyers" }) %>
+
+<header class="mb-4 flex items-center justify-between">
+  <a href="/" class="flex items-center gap-2">
+    <div class="h-8 w-8 rounded bg-slate-900 dark:bg-slate-100"></div>
+    <span class="text-lg font-semibold">Flyers</span>
+  </a>
+  <a href="/rss/global.xml" class="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-slate-100">RSS</a>
+</header>
+
+<form action="/" method="get" class="mb-4 grid grid-cols-2 gap-2 text-sm">
+  <input name="q"     value="<%= it.filters.q || '' %>"     placeholder="Search"     class="col-span-2 rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-slate-700" />
+  <input name="city"  value="<%= it.filters.city || '' %>"  placeholder="City"       class="rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-slate-700" />
+  <input name="state" value="<%= it.filters.state || '' %>" placeholder="ST" maxlength="2" class="rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-slate-700" />
+  <input name="zip"   value="<%= it.filters.zip || '' %>"   placeholder="ZIP"        class="rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-slate-700" />
+  <label class="flex items-center gap-2 px-1">
+    <input type="checkbox" name="includeExpired" value="1" <%= it.filters.includeExpired ? 'checked' : '' %> />
+    <span>Include expired</span>
+  </label>
+  <div class="col-span-2 flex gap-2">
+    <button type="submit" class="rounded bg-slate-900 px-3 py-2 text-white dark:bg-slate-100 dark:text-slate-900">Apply</button>
+    <a href="/" class="rounded border border-slate-300 px-3 py-2 dark:border-slate-700">Reset</a>
+  </div>
+</form>
+
+<div id="cards">
+  <%~ include("_cards", it) %>
+</div>
+
+<%~ include("_foot") %>

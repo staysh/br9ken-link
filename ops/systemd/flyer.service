@@ -1,0 +1,31 @@
+[Unit]
+Description=Flyer aggregator
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=flyer
+Group=flyer
+WorkingDirectory=/opt/flyer
+EnvironmentFile=/etc/flyer/env
+ExecStart=/usr/bin/node dist/src/index.js
+Restart=on-failure
+RestartSec=3
+
+# Hardening
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/flyer/data /opt/flyer/media
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+LockPersonality=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+MemoryDenyWriteExecute=yes
+
+[Install]
+WantedBy=multi-user.target

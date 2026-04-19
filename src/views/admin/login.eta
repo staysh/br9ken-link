@@ -1,0 +1,23 @@
+<%~ include("../_head", { title: "Admin sign-in" }) %>
+
+<h1 class="mb-4 text-xl font-semibold">Admin sign-in</h1>
+
+<% if (it.sent) { %>
+  <p class="mb-4 rounded border border-emerald-300 bg-emerald-50 p-3 text-sm dark:border-emerald-800 dark:bg-emerald-950">
+    If that email is registered, a sign-in link is on its way. It expires in 15 minutes.
+  </p>
+<% } else if (it.error) { %>
+  <p class="mb-4 rounded border border-rose-300 bg-rose-50 p-3 text-sm dark:border-rose-800 dark:bg-rose-950">
+    <%= it.error %>
+  </p>
+<% } %>
+
+<form action="/admin/login" method="post" class="space-y-3 text-sm">
+  <label class="block">
+    <span class="mb-1 block text-slate-600 dark:text-slate-400">Email</span>
+    <input type="email" name="email" required class="w-full rounded border border-slate-300 bg-transparent px-3 py-2 dark:border-slate-700" />
+  </label>
+  <button type="submit" class="rounded bg-slate-900 px-3 py-2 text-white dark:bg-slate-100 dark:text-slate-900">Send link</button>
+</form>
+
+<%~ include("../_foot") %>

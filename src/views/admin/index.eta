@@ -1,0 +1,62 @@
+<%
+const fmt = it.fmt;
+%>
+<%~ include("../_head", { title: "Pending moderation" }) %>
+
+<header class="mb-4 flex items-center justify-between">
+  <h1 class="text-xl font-semibold">Pending <span class="text-slate-500">(<%= it.pending.length %>)</span></h1>
+  <div class="text-sm text-slate-500">
+    <%= it.me.name %><% if (it.me.isSuperAdmin) { %> · super admin<% } %>
+    · <form action="/admin/logout" method="post" class="inline"><button class="underline">sign out</button></form>
+  </div>
+</header>
+
+<% if (it.pending.length === 0) { %>
+  <p class="py-8 text-center text-slate-500">Inbox is empty.</p>
+<% } %>
+
+<% for (const f of it.pending) { %>
+  <article class="mb-4 overflow-hidden rounded-lg border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+    <% if (f.primary && !f.primary.quarantined) { %>
+      <% if ((f.primary.mime || "").startsWith("video/")) { %>
+        <video src="/m/<%= f.primary.publicUuid %>/<%= encodeURIComponent(f.primary.filename) %>" controls preload="metadata" class="w-full bg-black"></video>
+      <% } else { %>
+        <img src="/m/<%= f.primary.publicUuid %>/<%= encodeURIComponent(f.primary.filename) %>" alt="" class="w-full" />
+      <% } %>
+    <% } %>
+    <div class="p-3">
+      <div class="mb-1 flex items-center justify-between">
+        <h2 class="text-base font-semibold"><%= f.title || "Untitled" %></h2>
+        <code class="rounded bg-slate-100 px-1.5 py-0.5 text-xs dark:bg-slate-800"><%= f.shortId %></code>
+      </div>
+      <% if (f.eventStart) { %>
+        <div class="text-sm text-slate-600 dark:text-slate-400"><%= fmt.dateTime(f.eventStart) %><% if (f.eventEnd) { %> – <%= fmt.dateTime(f.eventEnd) %><% } %></div>
+      <% } %>
+      <% const loc = fmt.location(f); if (loc) { %>
+        <div class="text-sm text-slate-600 dark:text-slate-400"><%= loc %></div>
+      <% } %>
+      <% if (f.description) { %>
+        <p class="mt-2 whitespace-pre-line text-sm text-slate-800 dark:text-slate-200"><%= f.description %></p>
+      <% } %>
+      <% if (f.parseErrors) { %>
+        <p class="mt-2 rounded border border-amber-300 bg-amber-50 p-2 text-xs text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-200">
+          <%= f.parseErrors %>
+        </p>
+      <% } %>
+      <div class="mt-3 flex gap-2">
+        <form action="/admin/decide" method="post" class="inline">
+          <input type="hidden" name="shortId" value="<%= f.shortId %>" />
+          <input type="hidden" name="decision" value="approve" />
+          <button class="rounded bg-emerald-600 px-3 py-2 text-sm text-white hover:bg-emerald-700">Approve</button>
+        </form>
+        <form action="/admin/decide" method="post" class="inline">
+          <input type="hidden" name="shortId" value="<%= f.shortId %>" />
+          <input type="hidden" name="decision" value="reject" />
+          <button class="rounded bg-rose-600 px-3 py-2 text-sm text-white hover:bg-rose-700">Reject</button>
+        </form>
+      </div>
+    </div>
+  </article>
+<% } %>
+
+<%~ include("../_foot") %>

@@ -1,0 +1,13 @@
+# /etc/caddy/Caddyfile (fragment) — add alongside your other sites.
+
+flyer.example.com {
+	encode zstd gzip
+
+	# Optional: long-cache RSS/media at the edge; Node already sets sensible
+	# Cache-Control headers, so Caddy doesn't need to override them.
+	reverse_proxy 127.0.0.1:3000
+
+	log {
+		output file /var/log/caddy/flyer.log
+	}
+}
