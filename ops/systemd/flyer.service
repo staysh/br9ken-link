@@ -25,7 +25,8 @@ ProtectControlGroups=yes
 LockPersonality=yes
 RestrictRealtime=yes
 RestrictSUIDSGID=yes
-MemoryDenyWriteExecute=yes
+# MemoryDenyWriteExecute is intentionally NOT set: V8's JIT requires W+X
+# mappings and will crash with SIGTRAP on startup when it's enabled.
 
 [Install]
 WantedBy=multi-user.target
